@@ -1,0 +1,77 @@
+TinypapersWindowManager:
+#version 0.0.1
+
+<TinypapersWindowManager>:
+    # inherits from BoxLayout
+    BasicListPage
+
+<BasicListPage>:
+    # inherits from BoxLayout
+    orientation: "vertical"
+    
+    #ROW 1 (HEADER)
+    BoxLayout:
+        size_hint_y: 15
+        Button:
+            background_normal: ""
+            background_color: 0, .36, .60, 1
+            text: "tinypapers"
+            #(!) make the tinypapers text larger
+            #(!) make it link back to main
+        #(!) add back button here
+    
+    #ROW 2
+    BoxLayout:
+        size_hint_y: 85
+        canvas.before:
+            Color:
+                rgb: .70, .80, .83
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            # left margin
+            size_hint_x: 5
+        ButtonList:
+            # main scrollable content
+            size_hint_x: 90
+        Label:
+            # right margin
+            size_hint_x: 5
+
+<ButtonList>:
+    # Inherits from ScrollView
+    
+    # content should automatically be at the top of the page, but it isn't.
+    # why? scroll_y should automatically be set to 1 and that should take
+    # care of it. even explicitly set, it doesn't change anything visually.
+    scroll_y: 1       
+    do_scroll_x: False
+    BoxLayout:
+        #(!) should be a ListView!!! That's what's wrong!
+        orientation: "vertical"
+        # this will later need an adapter, not a sample list.
+        ItemButton:
+            text: "text"
+        ItemButton:
+            text: "text"
+
+<ItemButton>:
+    # Inherits from ListItemButton
+    # These are the buttons that show up in lists of categories,
+    # stored items, etc. They will take up the majority of screen space
+    # so it's pretty important they look nice.
+    background_normal: ""
+    background_color: .45, .86, .92, 1
+    size_hint_y: None
+    
+
+
+
+
+
+
+
+
+
+

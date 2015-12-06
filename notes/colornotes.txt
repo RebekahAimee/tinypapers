@@ -1,0 +1,8 @@
+COLOR SCHEME IN DECIMAL
+Blue: 0, .36, .60
+Turq: .45, .86, .92
+Red: .76, .07, .22
+Gray: .70, .80, .83
+
+To calculate from hexadecimal, convert hex pairs to decimal,
+divide by 256, then round up to two points.

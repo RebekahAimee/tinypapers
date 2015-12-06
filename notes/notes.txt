@@ -1,0 +1,9 @@
+For the main list to scroll, you have to implement ScrollView.
+You can't use relative sizes (i.e., size_hint stuff) in the direction you want 
+to scroll; you should measure the list elements' height in display pixels (dp).
+Otherwise the elements will autosize to share space on the screen no matter
+how many there are or whether they can realistically fit.
+
+You can however (and should) use size_hint in the direction you're not
+scrolling. For tinypapers the size_hint that should be left alone is
+size_hint_x, because you want to scroll up and down (the y axis).

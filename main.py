@@ -4,9 +4,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.listview import ListView
 from kivy.factory import Factory
+from kivy.properties import ListProperty, StringProperty
 from kivy.uix.listview import ListItemButton
 
-#version 0.0.3
+#version 0.0.4
 
 class TinypapersApp(App):
     pass
@@ -16,25 +17,15 @@ class TinypapersWindowManager(BoxLayout):
     
 class BasicListPage(BoxLayout):
     pass
-    
-class ItemButton(ListItemButton):
-    pass
-    
+
 class MainPage(BasicListPage):
     pass
     
-class ButtonList(ScrollView):
-    # needs an args_converter
-    
-    data = ["this", "is", "sample", "data"]
-    
-    def args_converter(self, index, data_item):
-        return {'xyzzy': data_item}
-    
+class ButtonList(ListView):
+    pass
+
+class ItemButton(ListItemButton):
+    pass
 
 if __name__ == '__main__':
     TinypapersApp().run()
-    
-    
-    
-    

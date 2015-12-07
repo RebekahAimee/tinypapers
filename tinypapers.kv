@@ -3,11 +3,11 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.3
+#version 0.0.4
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
-    MainPage
+    BasicListPage:
 
 <BasicListPage>:
     # inherits from BoxLayout
@@ -29,40 +29,41 @@ TinypapersWindowManager:
     
     #ROW 2
     BoxLayout:
-        size_hint_y: 85
-        canvas.before:
-            Color:
-                rgb: .70, .80, .83
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        Label:
+        TextInput:
+            size_hint_x: 50
+            id: add_entry
+        Button:
+            size_hint_x: 50
+            text: "Add"
+            
+    #ROW 3
+    BoxLayout:
+        size_hint_y: 75
+        #canvas.before:
+        #    Color:
+        #        rgb: .70, .80, .83
+        #    Rectangle:
+        #        pos: self.pos
+        #        size: self.size
+        #Label:
             # left margin
-            size_hint_x: 5
+        #    size_hint_x: 5
         ButtonList:
             # main scrollable content
             size_hint_x: 90
-            # size_hint_y: 85
-        Label:
+        #Label:
             # right margin
-            size_hint_x: 5
+        #    size_hint_x: 5
 
-<ButtonList>:
-    # Inherits from ScrollView
-    scroll_y: 1
-    do_scroll_x: False
-    ListView:
-        id: button_listview
-        adapter:
-            ListAdapter(
-            data=[],
-            cls=main.ListItemButton,
-            args_converter=root.args_converter)
-    
-    
 <MainPage>:
     #inherits from BasicListPage
     #nothing here, basically just pass
+
+<ButtonList>:
+    # inherits from ListView
+    id: button_list
+    #adapter:
+    #    ListAdapter(data=[], cls=ListItemButton)
 
 <ItemButton>:
     # Inherits from ListItemButton

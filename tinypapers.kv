@@ -3,7 +3,7 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.4
+#version 0.0.5
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
@@ -12,63 +12,82 @@ TinypapersWindowManager:
 <BasicListPage>:
     # inherits from BoxLayout
     orientation: "vertical"
+    # tells BasicListPage's add_entry method where to find the TextInput box
+    
     
     #ROW 1 (HEADER)
-    BoxLayout:
-        size_hint_y: 15
-        Button:
-            background_normal: ""
-            background_color: 0, .36, .60, 1
-            text: "tinypapers"
-            color: .76, .07, .22, 1
-            size_hint_x: 70
-            bold: True
-            #(!) make the tinypapers text larger
-            #(!) make it link back to main
-        #(!) add back button here, give it size_hint 30 or so
+    TinypapersHeader:
     
     #ROW 2
     BoxLayout:
-        TextInput:
-            size_hint_x: 50
-            id: add_entry
+        size_hint_y: 10
         Button:
-            size_hint_x: 50
             text: "Add"
+            on_press: app.root.display_add_form()
             
     #ROW 3
     BoxLayout:
         size_hint_y: 75
-        #canvas.before:
-        #    Color:
-        #        rgb: .70, .80, .83
-        #    Rectangle:
-        #        pos: self.pos
-        #        size: self.size
-        #Label:
-            # left margin
-        #    size_hint_x: 5
         ButtonList:
             # main scrollable content
+            id: entry_list
             size_hint_x: 90
-        #Label:
-            # right margin
-        #    size_hint_x: 5
+            adapter:
+                ListAdapter(data=["{0}".format(i) \
+                for i in root.button_list_entries], \
+                cls=ListItemButton)
 
 <MainPage>:
     #inherits from BasicListPage
     #nothing here, basically just pass
 
+<AddPage>:
+    #inherits from BoxLayout
+    add_entry_text: title_box
+    orientation: "vertical"
+    
+    #ROW 1
+    TinypapersHeader:
+    
+    #ROW 2
+    Label:
+        size_hint_y: 15
+        text: "Add New Note To Self"
+    
+    #ROW 3
+    ScrollView:
+        size_hint_y: 70
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Title"
+            TextInput:
+                id: title_box
+            Label:
+                text: "Content"
+            TextInput:
+                id: content_box
+            Button:
+                text: "Submit"
+                on_press: root.add_entry()
+
 <ButtonList>:
     # inherits from ListView
-    id: button_list
-    #adapter:
-    #    ListAdapter(data=[], cls=ListItemButton)
+    # formatting stuff to make it look pretty will go here later
+
+<TinypapersHeader>:
+    # inherits from BoxLayout
+    size_hint_y: 15
+    Label:
+        size_hint_x: 80
+        text: "tinypapers"
+    Button:
+        size_hint_x: 20
+        text: "Back"
+        on_press: app.root.display_main_page()
 
 <ItemButton>:
     # Inherits from ListItemButton
-    # These are the buttons that show up in ButtonLists. They'll take up
-    # a lot of screen space, so it's important that they look nice.
     background_normal: ""
     background_color: .45, .86, .92, 1
     size_hint_y: None

@@ -1,9 +1,14 @@
+#: import ListItemButton kivy.uix.listview.ListItemButton
+#: import main main
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+
 TinypapersWindowManager:
-#version 0.0.1
+#version 0.0.2
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
-    BasicListPage
+    MainPage
+    # which inherits from BasicListPage, so basically it just shows the latter
 
 <BasicListPage>:
     # inherits from BoxLayout
@@ -16,9 +21,12 @@ TinypapersWindowManager:
             background_normal: ""
             background_color: 0, .36, .60, 1
             text: "tinypapers"
+            color: .76, .07, .22, 1
+            size_hint_x: 70
+            bold: True
             #(!) make the tinypapers text larger
             #(!) make it link back to main
-        #(!) add back button here
+        #(!) add back button here, give it size_hint 30 or so
     
     #ROW 2
     BoxLayout:
@@ -39,28 +47,26 @@ TinypapersWindowManager:
             # right margin
             size_hint_x: 5
 
+<MainPage>:
+    #inherits from BasicListPage
+    #nothing here, basically just pass
+
 <ButtonList>:
     # Inherits from ScrollView
-    
-    # content should automatically be at the top of the page, but it isn't.
-    # why? scroll_y should automatically be set to 1 and that should take
-    # care of it. even explicitly set, it doesn't change anything visually.
-    scroll_y: 1       
+    scroll_y: 1
     do_scroll_x: False
-    BoxLayout:
-        #(!) should be a ListView!!! That's what's wrong!
-        orientation: "vertical"
+    ListView:
+        # ListView is experimental. Maybe it's the problem here.
         # this will later need an adapter, not a sample list.
         ItemButton:
             text: "text"
         ItemButton:
-            text: "text"
+            text: "text2"
 
 <ItemButton>:
     # Inherits from ListItemButton
-    # These are the buttons that show up in lists of categories,
-    # stored items, etc. They will take up the majority of screen space
-    # so it's pretty important they look nice.
+    # These are the buttons that show up in ButtonLists. They'll take up
+    # a lot of screen space, so it's important that they look nice.
     background_normal: ""
     background_color: .45, .86, .92, 1
     size_hint_y: None

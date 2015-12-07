@@ -5,7 +5,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.factory import Factory
 from kivy.uix.listview import ListItemButton
 
-#version 0.0.1
+#version 0.0.2
 
 class TinypapersApp(App):
     pass

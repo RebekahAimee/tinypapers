@@ -3,12 +3,11 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.2
+#version 0.0.3
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
     MainPage
-    # which inherits from BasicListPage, so basically it just shows the latter
 
 <BasicListPage>:
     # inherits from BoxLayout
@@ -43,25 +42,27 @@ TinypapersWindowManager:
         ButtonList:
             # main scrollable content
             size_hint_x: 90
+            # size_hint_y: 85
         Label:
             # right margin
             size_hint_x: 5
-
-<MainPage>:
-    #inherits from BasicListPage
-    #nothing here, basically just pass
 
 <ButtonList>:
     # Inherits from ScrollView
     scroll_y: 1
     do_scroll_x: False
     ListView:
-        # ListView is experimental. Maybe it's the problem here.
-        # this will later need an adapter, not a sample list.
-        ItemButton:
-            text: "text"
-        ItemButton:
-            text: "text2"
+        id: button_listview
+        adapter:
+            ListAdapter(
+            data=[],
+            cls=main.ListItemButton,
+            args_converter=root.args_converter)
+    
+    
+<MainPage>:
+    #inherits from BasicListPage
+    #nothing here, basically just pass
 
 <ItemButton>:
     # Inherits from ListItemButton

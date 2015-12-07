@@ -3,17 +3,32 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.5
+#version 0.0.6
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
-    BasicListPage:
+    MainPage:
 
-<BasicListPage>:
+<MainPage>:
+    orientation: "vertical"
+    
+    #ROW 1 (HEADER)
+    TinypapersHeader:
+
+    #ROW 2
+    BoxLayout:
+        size_hint_y: 15
+        CategoryButton:
+            text: "Notes To Self"
+            on_press: app.root.display_index_page()
+        AddButton:
+            text: "Add"
+            on_press: app.root.display_add_form()
+    
+<IndexPage>:
     # inherits from BoxLayout
     orientation: "vertical"
-    # tells BasicListPage's add_entry method where to find the TextInput box
-    
+    entry_list: entry_list
     
     #ROW 1 (HEADER)
     TinypapersHeader:
@@ -37,10 +52,6 @@ TinypapersWindowManager:
                 for i in root.button_list_entries], \
                 cls=ListItemButton)
 
-<MainPage>:
-    #inherits from BasicListPage
-    #nothing here, basically just pass
-
 <AddPage>:
     #inherits from BoxLayout
     add_entry_text: title_box
@@ -63,6 +74,8 @@ TinypapersWindowManager:
                 text: "Title"
             TextInput:
                 id: title_box
+                focus: True
+                multiline: False
             Label:
                 text: "Content"
             TextInput:
@@ -70,13 +83,12 @@ TinypapersWindowManager:
             Button:
                 text: "Submit"
                 on_press: root.add_entry()
+                on_press: app.root.display_index_page()
 
-<ButtonList>:
-    # inherits from ListView
+<ButtonList@ListView>:
     # formatting stuff to make it look pretty will go here later
 
-<TinypapersHeader>:
-    # inherits from BoxLayout
+<TinypapersHeader@BoxLayout>:
     size_hint_y: 15
     Label:
         size_hint_x: 80
@@ -86,19 +98,15 @@ TinypapersWindowManager:
         text: "Back"
         on_press: app.root.display_main_page()
 
-<ItemButton>:
-    # Inherits from ListItemButton
+<ItemButton@ListItemButton>:
     background_normal: ""
     background_color: .45, .86, .92, 1
     size_hint_y: None
-    
 
+<CategoryButton@Button>:
+    size_hint_x: 70
 
-
-
-
-
-
-
+<AddButton@Button>:
+    size_hint_x: 30
 
 

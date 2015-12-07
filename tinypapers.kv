@@ -3,7 +3,7 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.6
+#version 0.0.7
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
@@ -83,7 +83,20 @@ TinypapersWindowManager:
             Button:
                 text: "Submit"
                 on_press: root.add_entry()
-                on_press: app.root.display_index_page()
+                on_press: app.root.display_confirmation_page()
+
+<ConfirmationPage>:
+    #inherits from AnchorLayout
+    BoxLayout:
+        size_hint: None, None
+        height: "80dp"
+        width: "120dp"
+        orientation: "vertical"
+        Label:
+            text: "Added!"
+        Button:
+            text: "Great, thanks!"
+            on_press: app.root.display_index_page()
 
 <ButtonList@ListView>:
     # formatting stuff to make it look pretty will go here later

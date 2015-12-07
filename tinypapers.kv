@@ -3,7 +3,7 @@
 #: import ListAdapter kivy.adapters.listadapter.ListAdapter
 
 TinypapersWindowManager:
-#version 0.0.7
+#version 0.0.8
 
 <TinypapersWindowManager>:
     # inherits from BoxLayout
@@ -83,6 +83,9 @@ TinypapersWindowManager:
             Button:
                 text: "Submit"
                 on_press: root.add_entry()
+                ##### testing code
+                on_press: app.root.save_entry(root.add_entry_text)
+                #####
                 on_press: app.root.display_confirmation_page()
 
 <ConfirmationPage>:
@@ -122,4 +125,36 @@ TinypapersWindowManager:
 <AddButton@Button>:
     size_hint_x: 30
 
+<BusinessCardAdd@BoxLayout>:
+    orientation: "vertical"
+    
+    Label:
+        text: "Add New Business Card"
+    
+    ScrollView:
+        size_hint_y: 70
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                text: "Business Name"
+            TextInput:
+                id: business_box
+                focus: True
+                multiline: False
+                
+            Button:
+                text: "Submit"
+                on_press: root.add_entry()
+                on_press: app.root.save_entry()
+                # program this ^ in!
+                on_press: app.root.display_confirmation_page()
 
+
+
+
+
+
+
+
+
+    
